@@ -1,0 +1,38 @@
+---
+title: "Reproducible Research - Course Project 1"
+author: "Umesh Moolchandani"
+date: "4/1/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Step 1 - Loading and preprocessing the data
+
+Code for unzipping, reading in and processing of the data
+
+
+```{r, echo=TRUE}
+setwd("D:/Personal/Coursera/Data Science Specialization/Reproducible Research/RepResearch_Project1")
+unzip("./repdata_data_activity.zip")
+activityData <- read.csv("./activity.csv")
+```
+
+Initial exploration of the data
+
+```{r}
+dim(activityData)
+names(activityData)
+head(activityData)
+str(activityData)
+#total number of missing data
+sum(is.na(activityData$steps))/dim(activityData)[[1]]
+#transforming the date column into date format using lubridate
+library(lubridate)
+activityData$date<-ymd(activityData$date)
+length(unique(activityData$date))
+```
+
+
