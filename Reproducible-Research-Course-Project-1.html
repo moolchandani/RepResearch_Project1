@@ -291,7 +291,7 @@ Q5&lt;-aggregate(data=Q5,steps~interval,FUN=&quot;max&quot;)</code></pre>
 </div>
 <div id="step-6" class="section level2">
 <h2>Step 6</h2>
-<p>Code to describe and show a strategy for imputing missing data There are multiple strategies to deal with multiple value imputations. The common strategies include: 1. Constant value imputations 2. Regression model value imputations 3. Mean/mode value substitutions For the purpose of simplicity, in this question, I will use the mean/mode value substitution strategy to impute missing values. That is, using the mean values to substitute out the missing values in the original data set Before doing any sort of imputation, it is helpful to understand what are the distributions of missing values by date and interval</p>
+<p>I’ve used the mean/mode value substitution method to update missing values, i.e., using the mean values to substitute the missing values in the original data set.</p>
 <pre class="r"><code>Q6&lt;-activityData
 Q6$Missing&lt;-is.na(Q6$steps)
 Q6&lt;-aggregate(data=Q6,Missing~date+interval,FUN=&quot;sum&quot;)
@@ -328,8 +328,8 @@ plot(y=Q6.2$Missing,x=Q6.2$Interval,main=&quot;Missing Value Distribution by Int
 ##        288        288        288        288        288        288        288 
 ## 2012-11-26 2012-11-27 2012-11-28 2012-11-29 2012-11-30 
 ##        288        288        288        288        288</code></pre>
-<p>By this point, from the plot, that the missing values have a very disctinct pattern. For every interval, there are consistantly 8 missing values. For the date, there are consistantly 288 missing values. And in total, there are 8 dates that have missing value. We don’t exactly know the cause for these missing values but there’s a pattern. For that matter, we can see that the mean value imputation is appropriate.</p>
-<p>We can see that every date has 288 data points. It means that the 8 dates have no data points at all what so ever. We can refine the analysis by looking at these missing values depending on their Weekday and interval parameters to matach with the average</p>
+<p>From the plot, it is evident that the missing values have a very distinct pattern. For every interval, there are consistently 8 missing values. For the date, there are consistently 288 missing values. And in total, there are 8 dates that have missing value. We don’t exactly know the cause for these missing values but there’s a pattern. For that matter, we can see that the mean value imputation is appropriate.</p>
+<p>It is evident that every date has 288 data points. It means that the 8 dates have no data points at all what so ever. We can refine the analysis by looking at these missing values depending on their Weekday and interval parameters to match with the average</p>
 <pre class="r"><code>#Dates that have missing values 
 library(lubridate)
 Q6.3&lt;-as.data.frame(Q6.1) %&gt;% select(date,Missing) %&gt;% arrange(desc(Missing))
